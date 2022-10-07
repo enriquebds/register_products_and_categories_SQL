@@ -8,7 +8,7 @@ const app = express();
 
 app.use(express.json());
 app.use("/categories", categoriesRoutes);
-app.use("/categories", productsRoutes);
+app.use("/products", productsRoutes);
 
 export default app.listen(3333, () => {
   startDatabase();
