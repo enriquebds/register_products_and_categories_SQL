@@ -4,7 +4,7 @@ import listAllProductsController from "../controllers/products/listAllProducts.c
 
 const routes = Router();
 
-routes.get("/products", listAllProductsController);
-routes.post("/products", createProductController);
+routes.get("", listAllProductsController);
+routes.post("", createProductController);
 
 export default routes;
