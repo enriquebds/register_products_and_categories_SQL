@@ -7,8 +7,8 @@ import productsRoutes from "./routes/products.routes";
 const app = express();
 
 app.use(express.json());
-app.use(categoriesRoutes);
-app.use(productsRoutes);
+app.use("/categories", categoriesRoutes);
+app.use("/categories", productsRoutes);
 
 export default app.listen(3333, () => {
   startDatabase();
