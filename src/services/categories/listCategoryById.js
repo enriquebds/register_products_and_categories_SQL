@@ -9,7 +9,7 @@ const listCategoryById = async (id) => {
     const category = res.rows[0];
 
     if (!category) {
-      throw new Error("User not found");
+      throw new Error("Category not found");
     }
 
     return category;

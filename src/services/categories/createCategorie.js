@@ -3,7 +3,7 @@ import database from "../../database";
 const createCategorie = async (name) => {
   try {
     const res = await database.query(
-      "INSERT INTO categories(name) VALUES($2) RETURNING *",
+      "INSERT INTO categories(name) VALUES($1) RETURNING *",
       [name]
     );
     return res.rows[0];
