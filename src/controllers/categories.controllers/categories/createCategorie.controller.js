@@ -1,12 +1,14 @@
 import createCategorie from "../../../services/categories/createCategorie";
 
 const createCategorieController = async (req, res) => {
-  const { name } = req.body;
+  const category = req.validatedBody;
 
   try {
-    const categorie = await createCategorie(name);
-
-    return res.status(201).json(categorie);
+    const createdCategory = await createCategorie(category);
+    return res.status(201).json({
+      message: "Category created",
+      category: createdCategory,
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,
