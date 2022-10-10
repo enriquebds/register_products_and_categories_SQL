@@ -4,11 +4,17 @@ import listAllCategoriesController from "../controllers/categories.controllers/c
 import listCategoryByIdController from "../controllers/categories.controllers/categories/listCategoryById.controller";
 import updateCategoryController from "../controllers/categories.controllers/categories/updateCategory.controller";
 import deleteCategoryController from "../controllers/categories.controllers/categories/deleteCategory.controller";
+import validateSerializerMiddleware from "../middlewares/validateSerializer.middleware";
+import { createCategory } from "../serializers/categories.serializer";
 
 const routes = Router();
 
 routes.get("", listAllCategoriesController);
-routes.post("", createCategorieController);
+routes.post(
+  "",
+  validateSerializerMiddleware(createCategory),
+  createCategorieController
+);
 routes.get("/:id", listCategoryByIdController);
 routes.patch("/:id", updateCategoryController);
 routes.delete("/:id", deleteCategoryController);
