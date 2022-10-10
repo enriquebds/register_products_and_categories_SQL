@@ -1,17 +1,25 @@
 import database from "../../database";
 
-const updateProduct = async (id, name, price, category_id) => {
+const updateProduct = async (id, data) => {
   try {
-    const res = await database.query(
-      "UPDATE products SET name = $1, price = $2, category_id = $3 WHERE id = $4 RETURNING *",
-      [name, price, category_id, id]
-    );
+    let query = "UPDATE products SET ";
+    const keys = Object.keys(data);
+    const values = Object.values(data);
+
+    keys.forEach((key, index) => {
+      query += `${key} = \$${(index += 1)}, `;
+    });
+
+    query = query.slice(0, -2);
+    query += `WHERE id = \$${(keys.length += 1)} RETURNING *;`;
+
+    const res = await database.query(query, [...values, id]);
 
     if (res.rowCount === 0) {
-      throw new Error("Product not found");
+      throw new Error(error);
     }
 
-    return { message: "Product Updated", product: res.rows[0] };
+    return res.rows[0];
   } catch (error) {
     throw new Error(error);
   }
