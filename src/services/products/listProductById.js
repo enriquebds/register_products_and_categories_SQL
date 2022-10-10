@@ -6,13 +6,11 @@ const listProductById = async (id) => {
       id,
     ]);
 
-    const product = res.rows[0];
-
-    if (!product) {
-      throw new Error("Product not found");
+    if (res.rowCount === 0) {
+      throw new Error("Produto não encontrado");
     }
 
-    return product;
+    return res.rows[0];
   } catch (error) {
     throw new Error(error);
   }
