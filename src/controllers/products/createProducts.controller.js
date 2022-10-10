@@ -5,7 +5,10 @@ const createProductController = async (req, res) => {
   try {
     const product = await createProduct(name, price, category_id);
 
-    return res.status(201).json(product);
+    return res.status(201).json({
+      message: "Product created",
+      product: product,
+    });
   } catch (error) {
     return res.status(400).json({
       message: error.message,
