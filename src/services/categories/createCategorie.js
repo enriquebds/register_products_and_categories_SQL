@@ -1,12 +1,15 @@
 import database from "../../database";
+import { createCategory } from "../../serializers/categories.serializer";
 
-const createCategorie = async (name) => {
+const createCategorie = async (category) => {
   try {
     const res = await database.query(
       "INSERT INTO categories(name) VALUES($1) RETURNING *",
-      [name]
+      [category.name]
     );
-    return res.rows[0];
+    return createCategory.validate(res.rows[0], {
+      stripUnknown: true,
+    });
   } catch (error) {
     throw new Error(error);
   }
