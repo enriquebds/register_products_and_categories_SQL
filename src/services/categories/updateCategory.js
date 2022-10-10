@@ -11,7 +11,7 @@ const updateCategory = async (id, name) => {
       throw new Error("Category not found");
     }
 
-    return { message: "Atualizado", category: res.rows[0] };
+    return { message: "Updated", category: res.rows[0] };
   } catch (error) {
     throw new Error(error);
   }
