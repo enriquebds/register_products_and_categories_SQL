@@ -7,7 +7,7 @@ const listProductById = async (id) => {
     ]);
 
     if (res.rowCount === 0) {
-      throw new Error("Produto não encontrado");
+      throw new Error("Product not found");
     }
 
     return res.rows[0];
